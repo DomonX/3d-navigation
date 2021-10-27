@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CubeMenuComponent } from './cube-menu/cube-menu.component';
+import { FirstPageComponent } from './first-page/first-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CubeMenuComponent
+    CubeMenuComponent,
+    FirstPageComponent
   ],
   imports: [
     BrowserModule,
