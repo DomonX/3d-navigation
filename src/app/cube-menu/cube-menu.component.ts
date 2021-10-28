@@ -1,13 +1,13 @@
-import { filter, map } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { fromEvent, Subject } from 'rxjs';
 
 @Component({
   selector: 'cube-menu',
   templateUrl: './cube-menu.component.html',
   styleUrls: ['./cube-menu.component.scss']
 })
-export class CubeMenuComponent {
+export class CubeMenuComponent implements OnDestroy {
 
   public rotation = {
     x: 0,
@@ -16,28 +16,22 @@ export class CubeMenuComponent {
   };
 
   public x = 0;
-  public y = 0;
-  public z = 0;
-
-  public currentXAxis = 0;
-  public currentYAxis = 0;
-
-  public xMatrix = ['x', 'z', '-x', '-z'];
-
-  public yMatrix = ['y', 'z'];
 
   public transformStyle = '';
   public scaleStyle = '';
 
   public scale = 0.5;
 
+  private destroyed: Subject<void> = new Subject<void>();
+
   constructor() {
-    fromEvent<KeyboardEvent>(document, 'keydown').pipe(filter(i => i.key === 'Escape')).subscribe(i => {
+    fromEvent<KeyboardEvent>(document, 'keydown').pipe(filter(i => i.key === 'Escape'), takeUntil(this.destroyed)).subscribe(i => {
       this.scale = 0.5;
       this.buildStyle();
     })
+
     fromEvent<KeyboardEvent>(document, 'keydown')
-      .pipe(filter(() => this.scale === 0.5), map((i) => i.key))
+      .pipe(filter(() => this.scale === 0.5), map((i) => i.key), takeUntil(this.destroyed))
       .subscribe((i) => {
         if (i === 'd') {
           this.goRight();
@@ -52,31 +46,43 @@ export class CubeMenuComponent {
 
         if (i === 's') {
           this.goDown();
-        }
-        if(i === 'Escape') {
-          this.scale = 0.5;
-        }
+        }        
         this.x = this.getAbsoluteCoordinate(this.rotation.x);
-        this.y = this.getAbsoluteCoordinate(this.rotation.y);
-        this.z = this.getAbsoluteCoordinate(this.rotation.z);
-        this.buildStyle();
       });
   }
 
-  private goRight(): void {
+  public goRight(): void {
+    if (this.x === 1 || this.x === 3) {
+      return;
+    }
     this.rotation.y--;
+    this.buildStyle();
   }
-
-  private goLeft(): void {
+  
+  public goLeft(): void {
+    if (this.x === 1 || this.x === 3) {
+      return;
+    }
     this.rotation.y++;
+    this.buildStyle();
   }
-
-  private goUp(): void {
+  
+  public goUp(): void {
+    if (this.x === 3) {
+      return;
+    }
     this.rotation.x--;
+    this.x = this.getAbsoluteCoordinate(this.rotation.x);
+    this.buildStyle();
   }
 
-  private goDown(): void {
+  public goDown(): void {
+    if (this.x === 1) {
+      return;
+    }
     this.rotation.x++;
+    this.x = this.getAbsoluteCoordinate(this.rotation.x);
+    this.buildStyle();
   }
 
   public clickedFace(): void {
@@ -84,11 +90,18 @@ export class CubeMenuComponent {
     this.buildStyle();
   }
 
+  public ngOnDestroy(): void {
+    this.destroyed.next();
+  }
+
   private getAbsoluteCoordinate(coord: number): number {
     return coord < 0 ? coord - 4 * Math.floor(coord / 4) : coord % 4;
   }
 
   private buildStyle(): void {
+    if(this.x === 1 || this.x === 3) {
+      this.rotation.y = 0;
+    }
     this.transformStyle = `transform: rotateX(${
       90 * this.rotation.x
     }deg) rotateY(${90 * this.rotation.y}deg) rotateZ(${

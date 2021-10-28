@@ -1,4 +1,4 @@
-@keyframes example {
+@keyframes cube-hover {
   0% {
     transform: rotateX(0deg);
   }
@@ -18,6 +18,7 @@
     transform: rotateX(0deg);
   }
 }
+
 .box-wrapper-1 {
   transform: scale3d(0.5, 0.5, 0.5);
   transform-style: preserve-3d;
@@ -27,9 +28,10 @@
         border: 1px solid blue;
       }
       .box-wrapper-2 {
+        transition: transform 0.3s;
         transform-style: preserve-3d;
         &:hover {
-          animation-name: example;
+          animation-name: cube-hover;
           animation-duration: 1s;
           animation-iteration-count: infinite;
         }
@@ -52,7 +54,6 @@
     height: 100%;
     position: absolute;
     backface-visibility: inherit;
-    color: #fff;
     background-color: lightcyan;
 
     img {
@@ -62,33 +63,153 @@
     }
 
     &.front {
-      // background: rgb(90, 90, 90);
       transform: translateZ(calc(100vh / 2));
     }
 
     &.back {
-      // background: rgb(0, 210, 0);
       transform: rotateY(180deg) translateZ(calc(100vh / 2));
     }
 
     &.right {
-      // background: rgb(210, 0, 0);
       transform: rotateY(90deg) translateZ(calc(100vh / 2));
     }
 
     &.left {
-      // background: rgb(0, 0, 210);
       transform: rotateY(-90deg) translateZ(calc(100vh / 2));
     }
 
     &.top {
-      // background: rgb(210, 210, 0);
       transform: rotateX(90deg) translateZ(calc(100vh / 2));
     }
 
     &.bottom {
-      // background: rgb(210, 0, 210);
       transform: rotateX(-90deg) translateZ(calc(100vh / 2));
     }
   }
+}
+
+
+@keyframes top-arrow {
+  0% {
+    transform: translateY(0px);
+  }
+  
+  50% {
+    transform: translateY(-20px);
+  }
+
+  0% {
+    transform: translateY(0px);
+  }
+}
+
+
+@keyframes right-arrow {
+  0% {
+    transform: translateX(0px);
+  }
+  
+  50% {
+    transform: translateX(+20px);
+  }
+
+  0% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes left-arrow {
+  0% {
+    transform: translateX(0px);
+  }
+  
+  50% {
+    transform: translateX(-20px);
+  }
+
+  0% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes bottom-arrow {
+  0% {
+    transform: translateY(0px);
+  }
+  
+  50% {
+    transform: translateY(+20px);
+  }
+
+  0% {
+    transform: translateY(0px);
+  }
+}
+
+.move-button {
+  --move: calc(50% - 40px);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  border-radius: 16px;
+  position: absolute;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+  color: #8888ff;
+  z-index: 1;
+
+  &:hover {
+    background-color: #ddddff;
+    animation-play-state: paused;
+  }
+
+  &.disabled {
+    color: #888888;
+    &:hover {
+      background-color: #bbbbbb;
+    }
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+
+  &.up{
+    top: 15vh;
+    right: var(--move);
+    animation-name: top-arrow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+  &.down{
+    bottom: 15vh;
+    left: var(--move);
+    animation-name: bottom-arrow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+  &.right{
+    left: calc(50vh + calc(calc(100vw - 50vh) / 2));
+    bottom: var(--move);
+    animation-name: right-arrow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+  &.left{
+    right: calc(50vh + calc(calc(100vw - 50vh) / 2));
+    bottom: var(--move);
+    animation-name: left-arrow;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+  
+}
+
+i {
+  
+  font-size: 50px;
 }

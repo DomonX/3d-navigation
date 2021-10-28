@@ -1,3 +1,8 @@
+<div (click)="goUp()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3}" class="move-button up" ><i nz-icon nzType="up" nzTheme="outline"></i></div>
+<div (click)="goDown()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 1}" class="move-button down" ><i nz-icon nzType="down" nzTheme="outline"></i></div>
+<div (click)="goLeft()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3 || x == 1}" class="move-button left" ><i nz-icon nzType="left" nzTheme="outline"></i></div>
+<div (click)="goRight()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3 || x == 1}" class="move-button right" ><i nz-icon nzType="right" nzTheme="outline"></i></div>
+{{ x }}
 <div [style]="scaleStyle" [ngClass]="{full: scale === 1}" class="box-wrapper-1">
     <div class="box-wrapper-2">
         <div [style]="transformStyle" class="box">
@@ -5,39 +10,19 @@
                 <first-page></first-page>
             </div>
             <div (click)="clickedFace()" class="face back">
-                BACK
-                <div style="position: absolute; left: 0">y</div>
-                <div style="position: absolute; right: 0">y</div>
-                <div style="position: absolute; top: 0">x</div>
-                <div style="position: absolute; bottom: 0">x</div>
+                
             </div>
             <div (click)="clickedFace()" class="face right">
-                RIGHT
-                <div style="position: absolute; left: 0">y</div>
-                <div style="position: absolute; right: 0">y</div>
-                <div style="position: absolute; top: 0">z</div>
-                <div style="position: absolute; bottom: 0">z</div>
+                <second-page></second-page>
             </div>
             <div (click)="clickedFace()" class="face left">
-                LEFT
-                <div style="position: absolute; left: 0">y</div>
-                <div style="position: absolute; right: 0">y</div>
-                <div style="position: absolute; top: 0">z</div>
-                <div style="position: absolute; bottom: 0">z</div>
+                
             </div>
             <div (click)="clickedFace()" class="face top">
-                TOP
-                <div style="position: absolute; left: 0">z</div>
-                <div style="position: absolute; right: 0">z</div>
-                <div style="position: absolute; top: 0">x</div>
-                <div style="position: absolute; bottom: 0">x</div>
+                
             </div>
             <div (click)="clickedFace()" class="face bottom">
-                BOTTOM
-                <div style="position: absolute; left: 0">z</div>
-                <div style="position: absolute; right: 0">z</div>
-                <div style="position: absolute; top: 0">x</div>
-                <div style="position: absolute; bottom: 0">x</div>
+                
             </div>
         </div>
     </div>
