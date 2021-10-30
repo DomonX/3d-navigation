@@ -1,8 +1,28 @@
-<div (click)="goUp()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3}" class="move-button up" ><i nz-icon nzType="up" nzTheme="outline"></i></div>
-<div (click)="goDown()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 1}" class="move-button down" ><i nz-icon nzType="down" nzTheme="outline"></i></div>
-<div (click)="goLeft()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3 || x == 1}" class="move-button left" ><i nz-icon nzType="left" nzTheme="outline"></i></div>
-<div (click)="goRight()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3 || x == 1}" class="move-button right" ><i nz-icon nzType="right" nzTheme="outline"></i></div>
-{{ x }}
+<div (click)="goUp()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3}" class="move-button up">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-chevron-right"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+    </svg>
+</div>
+<div (click)="goDown()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 1}" class="move-button down"><svg
+        xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-chevron-right"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+    </svg></div>
+<div (click)="goLeft()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3 || x == 1}" class="move-button left"><svg
+        xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-chevron-right"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+    </svg></div>
+<div (click)="goRight()" [ngClass]="{'hidden': scale == 1.0, 'disabled': x == 3 || x == 1}" class="move-button right">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-chevron-right"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+    </svg></div>
 <div [style]="scaleStyle" [ngClass]="{full: scale === 1}" class="box-wrapper-1">
     <div class="box-wrapper-2">
         <div [style]="transformStyle" class="box">
@@ -10,19 +30,19 @@
                 <first-page></first-page>
             </div>
             <div (click)="clickedFace()" class="face back">
-                
+
             </div>
             <div (click)="clickedFace()" class="face right">
                 <second-page></second-page>
             </div>
             <div (click)="clickedFace()" class="face left">
-                
+
             </div>
             <div (click)="clickedFace()" class="face top">
-                
+
             </div>
             <div (click)="clickedFace()" class="face bottom">
-                
+
             </div>
         </div>
     </div>

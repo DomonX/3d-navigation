@@ -3,16 +3,16 @@
     transform: rotateX(0deg);
   }
   20% {
-    transform: rotateX(20deg) rotateZ(20deg);
+    transform: rotateX(4deg) rotateZ(10deg);
   }
   40% {
-    transform: rotateX(30deg) rotateZ(0deg);
+    transform: rotateX(8deg) rotateZ(0deg);
   }
   60% {
-    transform: rotateX(-30deg) rotateZ(-20deg);
+    transform: rotateX(-8deg) rotateZ(-10deg);
   }
   80% {
-    transform: rotateX(-20deg) rotateZ(0ddeg);
+    transform: rotateX(-4deg) rotateZ(0deg);
   }
   100% {
     transform: rotateX(0deg);
@@ -167,10 +167,11 @@
   }
 
   &.disabled {
-    color: #888888;
-    &:hover {
-      background-color: #bbbbbb;
-    }
+    display: none;
+    // color: #888888;
+    // &:hover {
+      // background-color: #bbbbbb;
+    // }
   }
 
   &.hidden {
@@ -184,6 +185,9 @@
     animation-name: top-arrow;
     animation-duration: 1s;
     animation-iteration-count: infinite;
+    svg {
+      transform: rotate(-90deg);
+    }
   }
   &.down{
     bottom: 15vh;
@@ -191,6 +195,9 @@
     animation-name: bottom-arrow;
     animation-duration: 1s;
     animation-iteration-count: infinite;
+    svg {
+      transform: rotate(90deg);
+    }
   }
   &.right{
     left: calc(50vh + calc(calc(100vw - 50vh) / 2));
@@ -205,6 +212,9 @@
     animation-name: left-arrow;
     animation-duration: 1s;
     animation-iteration-count: infinite;
+    svg {
+      transform: rotate(180deg);
+    }
   }
   
 }
