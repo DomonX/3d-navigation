@@ -33,20 +33,23 @@ export class CubeMenuComponent implements OnDestroy {
     fromEvent<KeyboardEvent>(document, 'keydown')
       .pipe(filter(() => this.scale === 0.5), map((i) => i.key), takeUntil(this.destroyed))
       .subscribe((i) => {
-        if (i === 'd') {
+        if (i === 'd' || i === 'ArrowRight') {
           this.goRight();
         }
-        if (i === 'a') {
+        if (i === 'a' || i === 'ArrowLeft') {
           this.goLeft();
         }
 
-        if (i === 'w') {
+        if (i === 'w' || i === 'ArrowUp') {
           this.goUp();
         }
 
-        if (i === 's') {
+        if (i === 's' || i === 'ArrowDown') {
           this.goDown();
-        }        
+        }    
+        if (i === 'Enter') {
+          this.clickedFace();
+        }         
         this.x = this.getAbsoluteCoordinate(this.rotation.x);
       });
   }
