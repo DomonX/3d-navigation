@@ -23,20 +23,23 @@
   transform: scale3d(0.5, 0.5, 0.5);
   transform-style: preserve-3d;
   transition: transform 0.3s;
+  &.full {
+    transform: scale3d(1, 1, 1);
+  }
   &:not(.full) {
-      .face {
-        cursor: pointer;
-        border: 1px solid blue;
+    .face {
+      cursor: pointer;
+      border: 1px solid blue;
+    }
+    .box-wrapper-2 {
+      transition: transform 0.3s;
+      transform-style: preserve-3d;
+      &:hover {
+        animation-name: cube-hover;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
       }
-      .box-wrapper-2 {
-        transition: transform 0.3s;
-        transform-style: preserve-3d;
-        &:hover {
-          animation-name: cube-hover;
-          animation-duration: 1s;
-          animation-iteration-count: infinite;
-        }
-      }
+    }
   }
 }
 
@@ -54,47 +57,34 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    backface-visibility: inherit;
     background-color: lightcyan;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
     &.front {
       transform: translateZ(calc(100vh / 2));
     }
-
     &.back {
       transform: rotateY(180deg) translateZ(calc(100vh / 2));
     }
-
     &.right {
       transform: rotateY(90deg) translateZ(calc(100vh / 2));
     }
-
     &.left {
       transform: rotateY(-90deg) translateZ(calc(100vh / 2));
     }
-
     &.top {
       transform: rotateX(90deg) translateZ(calc(100vh / 2));
     }
-
     &.bottom {
       transform: rotateX(-90deg) translateZ(calc(100vh / 2));
     }
   }
 }
 
-
 @keyframes top-arrow {
   0% {
     transform: translateY(0px);
   }
-  
+
   50% {
     transform: translateY(-20px);
   }
@@ -104,12 +94,11 @@
   }
 }
 
-
 @keyframes right-arrow {
   0% {
     transform: translateX(0px);
   }
-  
+
   50% {
     transform: translateX(+20px);
   }
@@ -123,7 +112,7 @@
   0% {
     transform: translateX(0px);
   }
-  
+
   50% {
     transform: translateX(-20px);
   }
@@ -137,7 +126,7 @@
   0% {
     transform: translateY(0px);
   }
-  
+
   50% {
     transform: translateY(+20px);
   }
@@ -169,18 +158,13 @@
 
   &.disabled {
     display: none;
-    // color: #888888;
-    // &:hover {
-      // background-color: #bbbbbb;
-    // }
   }
 
   &.hidden {
     display: none;
   }
 
-
-  &.up{
+  &.up {
     top: 15vh;
     right: var(--move);
     animation-name: top-arrow;
@@ -190,7 +174,7 @@
       transform: rotate(-90deg);
     }
   }
-  &.down{
+  &.down {
     bottom: 15vh;
     left: var(--move);
     animation-name: bottom-arrow;
@@ -200,14 +184,14 @@
       transform: rotate(90deg);
     }
   }
-  &.right{
+  &.right {
     left: calc(50vh + calc(calc(100vw - 50vh) / 2));
     bottom: var(--move);
     animation-name: right-arrow;
     animation-duration: 1s;
     animation-iteration-count: infinite;
   }
-  &.left{
+  &.left {
     right: calc(50vh + calc(calc(100vw - 50vh) / 2));
     bottom: var(--move);
     animation-name: left-arrow;
@@ -217,10 +201,8 @@
       transform: rotate(180deg);
     }
   }
-  
 }
 
 i {
-  
   font-size: 50px;
 }

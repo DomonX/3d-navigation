@@ -2,20 +2,21 @@ import { filter, map, takeUntil } from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 
+type MyType = Record<'x' | 'y' | 'z', number>;
+
 @Component({
   selector: 'cube-menu',
   templateUrl: './cube-menu.component.html',
-  styleUrls: ['./cube-menu.component.scss']
+  styleUrls: ['./cube-menu.component.scss'],
 })
 export class CubeMenuComponent implements OnDestroy {
-
-  public rotation = {
+  public rotation: { [T in 'x' | 'y' | 'z']: number } = {
     x: 0,
     y: 0,
     z: 0,
   };
 
-  public x = 0;
+  public x: number = 0;
 
   public transformStyle = '';
   public scaleStyle = '';
@@ -25,33 +26,35 @@ export class CubeMenuComponent implements OnDestroy {
   private destroyed: Subject<void> = new Subject<void>();
 
   constructor() {
-    fromEvent<KeyboardEvent>(document, 'keydown').pipe(filter(i => i.key === 'Escape'), takeUntil(this.destroyed)).subscribe(i => {
-      this.scale = 0.5;
-      this.buildStyle();
-    })
-
     fromEvent<KeyboardEvent>(document, 'keydown')
-      .pipe(filter(() => this.scale === 0.5), map((i) => i.key), takeUntil(this.destroyed))
-      .subscribe((i) => {
-        if (i === 'd' || i === 'ArrowRight') {
-          this.goRight();
-        }
-        if (i === 'a' || i === 'ArrowLeft') {
-          this.goLeft();
-        }
-
-        if (i === 'w' || i === 'ArrowUp') {
-          this.goUp();
-        }
-
-        if (i === 's' || i === 'ArrowDown') {
-          this.goDown();
-        }    
-        if (i === 'Enter') {
-          this.clickedFace();
-        }         
-        this.x = this.getAbsoluteCoordinate(this.rotation.x);
+      .pipe(
+        filter((i) => i.key === 'Escape'),
+        takeUntil(this.destroyed)
+      )
+      .subscribe(() => {
+        this.scale = 0.5;
+        this.buildStyle();
       });
+
+    const key$ = fromEvent<KeyboardEvent>(document, 'keydown').pipe(
+      filter(() => this.scale === 0.5),
+      map((i) => i.key),
+      takeUntil(this.destroyed)
+    );
+
+    key$
+      .pipe(filter((i) => i === 'd' || i === 'ArrowRight'))
+      .subscribe(() => this.goRight());
+    key$
+      .pipe(filter((i) => i === 'a' || i === 'ArrowLeft'))
+      .subscribe(() => this.goLeft());
+    key$
+      .pipe(filter((i) => i === 'w' || i === 'ArrowUp'))
+      .subscribe(() => this.goUp());
+    key$
+      .pipe(filter((i) => i === 's' || i === 'ArrowDown'))
+      .subscribe(() => this.goDown());
+    key$.pipe(filter((i) => i === 'Enter')).subscribe(() => this.clickedFace());
   }
 
   public goRight(): void {
@@ -61,7 +64,7 @@ export class CubeMenuComponent implements OnDestroy {
     this.rotation.y--;
     this.buildStyle();
   }
-  
+
   public goLeft(): void {
     if (this.x === 1 || this.x === 3) {
       return;
@@ -69,7 +72,7 @@ export class CubeMenuComponent implements OnDestroy {
     this.rotation.y++;
     this.buildStyle();
   }
-  
+
   public goUp(): void {
     if (this.x === 3) {
       return;
@@ -102,7 +105,7 @@ export class CubeMenuComponent implements OnDestroy {
   }
 
   private buildStyle(): void {
-    if(this.x === 1 || this.x === 3) {
+    if (this.x === 1 || this.x === 3) {
       this.rotation.y = 0;
     }
     this.transformStyle = `transform: rotateX(${

@@ -22,28 +22,19 @@
         viewBox="0 0 16 16">
         <path fill-rule="evenodd"
             d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
-    </svg></div>
-<div [style]="scaleStyle" [ngClass]="{full: scale === 1}" class="box-wrapper-1">
+    </svg>
+</div>
+<div [ngClass]="{full: scale === 1}" class="box-wrapper-1">
     <div class="box-wrapper-2">
         <div [style]="transformStyle" class="box">
             <div (click)="clickedFace()" class="face front">
                 <first-page></first-page>
             </div>
-            <div (click)="clickedFace()" class="face back">
-
-            </div>
-            <div (click)="clickedFace()" class="face right">
-                <second-page></second-page>
-            </div>
-            <div (click)="clickedFace()" class="face left">
-
-            </div>
-            <div (click)="clickedFace()" class="face top">
-
-            </div>
-            <div (click)="clickedFace()" class="face bottom">
-
-            </div>
+            <div (click)="clickedFace()" class="face back"> BACK </div>
+            <div (click)="clickedFace()" class="face right"> RIGHT </div>
+            <div (click)="clickedFace()" class="face left"> LEFT </div>
+            <div (click)="clickedFace()" class="face top"> TOP </div>
+            <div (click)="clickedFace()" class="face bottom"> BOTTOM </div>
         </div>
     </div>
 </div>

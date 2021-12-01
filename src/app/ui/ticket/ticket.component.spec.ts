@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SecondPageComponent } from './second-page.component';
+import { TicketComponent } from './ticket.component';
 
-describe('SecondPageComponent', () => {
-  let component: SecondPageComponent;
-  let fixture: ComponentFixture<SecondPageComponent>;
+describe('TicketComponent', () => {
+  let component: TicketComponent;
+  let fixture: ComponentFixture<TicketComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SecondPageComponent ]
+      declarations: [ TicketComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SecondPageComponent);
+    fixture = TestBed.createComponent(TicketComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

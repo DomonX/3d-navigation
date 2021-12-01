@@ -1,3 +1,4 @@
+import { MenuComponent } from './ui/menu/menu.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -10,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { SecondPageComponent } from './second-page/second-page.component';
+import { TitleCardComponent } from './ui/title-card/title-card.component';
+import { TicketComponent } from './ui/ticket/ticket.component';
 
 registerLocaleData(en);
 
@@ -19,7 +21,9 @@ registerLocaleData(en);
     AppComponent,
     CubeMenuComponent,
     FirstPageComponent,
-    SecondPageComponent,
+    TitleCardComponent,
+    MenuComponent,
+    TicketComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,6 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

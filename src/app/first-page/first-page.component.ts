@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./first-page.component.scss'],
 })
 export class FirstPageComponent implements OnInit {
+  public items: string[] = ['Menu1', 'Menu2', 'Menu3'];
 
-  constructor() {  }
+  constructor() {}
 
   ngOnInit(): void {}
 }
